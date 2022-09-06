@@ -62,9 +62,20 @@ app. get('/addpost2', (req, res) => {
     });
 });
 
-// Slect post
+// Select post
 app. get('/getposts', (req, res) => {
     let sql = 'SELECT * FROM posts';
+    let query = db.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send('Posts fetched...');
+    });
+});
+
+
+// Select Single post
+app. get('/getpost/:id', (req, res) => {
+    let sql = `SELECT * FROM posts where id = ${req.params.id}`;
     let query = db.query(sql, (err, result) => {
         if(err) throw err;
         console.log(result);
@@ -72,14 +83,14 @@ app. get('/getposts', (req, res) => {
     });
 });
 
-
-// Slect Single post
-app. get('/getpost/:id', (req, res) => {
-    let sql = `SELECT * FROM posts where id = ${req.params.id}`;
-    let query = db.query(sql, (err, result) => {
+// Update post
+app. get('/updatepost/:id', (req, res) => {
+    let newTitle = 'Update Title';
+    let sql = `UPDATE posts SET title = '${newTitle}' where id = ${req.params.id}`;
+    let query= db.query(sql, (err, result) => {
         if(err) throw err;
         console.log(result);
-        res.send('Post fetched');
+        res.send('Post updated...');
     });
 });
 
