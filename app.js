@@ -59,8 +59,29 @@ app. get('/addpost2', (req, res) => {
         if(err) throw err;
         console.log(result);
         res.send('Posts 2 added...');
-    })
-})
+    });
+});
+
+// Slect post
+app. get('/getposts', (req, res) => {
+    let sql = 'SELECT * FROM posts';
+    let query = db.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send('Post fetched...');
+    });
+});
+
+
+// Slect Single post
+app. get('/getpost/:id', (req, res) => {
+    let sql = `SELECT * FROM posts where id = ${req.params.id}`;
+    let query = db.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send('Post fetched');
+    });
+});
 
 app.listen('3000', () => {
     console.log("Server started on the port 3000");
