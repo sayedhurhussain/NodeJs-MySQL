@@ -40,6 +40,27 @@ db.query(sql, (err, result) => {
     });
 });
 
+// insert post 1
+app. get('/addpost1', (req, res) => {
+    let post = {title: 'post one', body: 'This is post number one'};
+    let sql = 'INSERT INTO posts SET ?';
+    let query = db.query(sql, post, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send('Posts 1 added...');
+    });
+});
+
+// insert post 2
+app. get('/addpost2', (req, res) => {
+    let post = {title: 'post Two', body: 'This is post number two'};
+    let sql = 'INSERT INTO posts SET ?';
+    let query = db.query(sql, post, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send('Posts 2 added...');
+    })
+})
 
 app.listen('3000', () => {
     console.log("Server started on the port 3000");
